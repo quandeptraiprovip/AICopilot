@@ -6,7 +6,7 @@ app.use(express.json())
 
 app.get("/a",(req,res) => {
   console.log(req.body);
-  res.send("anh")
+  res.send("anh quan")
 })
 
 app.listen(3000, () => {

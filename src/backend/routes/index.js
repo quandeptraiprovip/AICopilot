@@ -2,22 +2,12 @@ import { Router } from "express"
 
 const appRouter = Router()
 
+const {getGoals, postGoals, putGoals, deleteGoals} = require ('../controllers/controllers.js') 
 
-appRouter.get("/", (req, res) => {
-  res.status(200).json({message: "routes/index.js get"})
-})
+appRouter.route('/').get(getGoals).post(postGoals)
 
-appRouter.post("/:id", (req, res) => {
-    res.status(200).json({message: "routes/index.js post"})
-})
+appRouter.route('/:id').delete(deleteGoals).put(putGoals)
 
-appRouter.put("/:id", (req, res) => {
-    res.status(200).json({message: "routes/index.js put ${req.params.id}"})
-})
-
-appRouter.delete("/", (req, res) => {
-    res.status(200).json({message: "routes/index.js delete ${req.params.id}"})
-})
 module.exports = appRouter;
 
 

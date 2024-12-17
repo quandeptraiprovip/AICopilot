@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './login.css'; // Import the CSS file
-import logo from './assets/logo.png'; // Your logo image path
+import logo from './assets/logo.png'; // Your logo image path 
+
 import googleLogo from './assets/Google_logo.svg.png'; // Google logo image path
 import { Link } from 'react-router-dom';
 
@@ -53,9 +54,7 @@ const LoginPage = () => {
           Login with Google
         </button>
         <p className="forgot-password">Forgot your password?</p>
-        <p className="sign-up">
-          {/* Don't have an account? <a href="/signup" className="sign-up-link">Sign Up</a> */}
-          Don't have an account? <Link to="/signup" className="sign-up-link">Sign up here</Link>
+        <p className="sign-up">Don't have an account? <Link to="/signup" className="sign-up-link">Sign up here</Link>
         </p>
         {message && <p className="message">{message}</p>}
       </div>

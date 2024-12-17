@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './signup.css'; // Import the CSS file
 import logo from './assets/logo.png'; // Path to your logo image
 import { Link } from 'react-router-dom';

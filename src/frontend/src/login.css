@@ -1,0 +1,164 @@
+/* Full-screen container */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: rgb(226, 183, 183);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Login page container */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* Login container box */
+.login-container {
+  width: 400px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Logo styling */
+.chatgpt-logo {
+  width: 40px;
+  height: auto;
+}
+
+/* Title */
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+  font-family: roboto;
+}
+/* Input fields */
+.input-field {
+  background-color: white;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: black;
+}
+
+.name {
+  font-size: 30px;
+  margin: 0px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: rgb(226, 183, 183);
+  font-family: roboto;
+}
+
+/* Login button */
+.login-button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(226, 183, 183);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: rgb(220, 104, 104);
+  border-color: black;
+}
+
+/* Forgot password text */
+.forgot-password {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Message styling */
+.message {
+  margin-top: 15px;
+  font-size: 14px;
+  color: red;
+}
+
+/* Google login button */
+.google-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.google-login-button:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Google logo inside the button */
+.google-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px; /* Adds space between the logo and the text */
+}
+
+/* Centered text styling for Google login */
+.google-login-button span {
+  font-family: Arial, sans-serif;
+  color: #555;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Sign-up text styling */
+.sign-up {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Sign-up link styling */
+.sign-up-link {
+  color: rgb(226, 183, 183);
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sign-up-link:hover {
+  color: rgb(220, 104, 104);
+  text-decoration: underline;
+}

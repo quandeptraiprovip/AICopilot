@@ -1,14 +1,22 @@
-import express from "express"
+import app from "./app.js"
+import {connectToDatabase} from './db/connection.js'
 
-const app = express();
-
-app.use(express.json())
 
 app.get("/a",(req,res) => {
   console.log(req.body);
   res.send("anh quan")
 })
 
-app.listen(3000, () => {
-  console.log("running on 3000")
+const PORT = process.env.PORT || 3000
+connectToDatabase().
+  then(() => { 
+    app.listen(PORT, () => {
+      console.log("Server on 3000 and connected to DB")
+    })
+    
 })
+.catch((error) => {
+  console.log(error)
+})
+
+

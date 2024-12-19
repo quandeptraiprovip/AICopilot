@@ -20,6 +20,11 @@ const chatSchema = new mongoose.Schema({
 	}
 })
 const userSchema = new mongoose.Schema({
+	email: {
+		type: String,
+		required: true,
+		unique: true
+	},
 	username: {
 		type: String,
 		required: true,
@@ -29,11 +34,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	email: {
-		type: String,
-		required: true,
-		unique: true
-	},
+	
 	chats: [chatSchema]
 
 })

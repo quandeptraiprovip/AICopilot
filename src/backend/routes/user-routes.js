@@ -6,3 +6,4 @@ const userRoutes = router();
 userRoutes.get("/", getAllUsers)
 
 export default userRoutes;
+

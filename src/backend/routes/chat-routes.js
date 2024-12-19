@@ -1,5 +1,5 @@
-import { router } from 'express';
+import { Router  } from 'express';
 
-const chatRoutes = router();
+const chatRoutes = Router();
 
 export default chatRoutes;

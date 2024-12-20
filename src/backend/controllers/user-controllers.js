@@ -1,5 +1,8 @@
 import User from "../models/user.js"
 import {hash,compare} from "bcrypt"
+import {createToken} from "../utils/token.js"
+import {COOKIE_NAME} from "../utils/constants.js"
+
 export const getAllUsers = async (req, res, next) => {
 	//get all users
 	try {
@@ -33,6 +36,26 @@ export const userSignup = async (req, res, next) => {
 		
 	})
 	await user.save()
+
+	//Create token and store in cookie
+	res.clearCookie(COOKIE_NAME, {
+		path: "/", 
+		domain: "localhost", 
+		httpOnly: true,
+		signed: true 
+	})
+
+	const token = createToken(user._id.toString(), user.email, "7d")
+	const expires = new Date();
+	expires.setDate(expires.getDate() + 7);
+	res.cookie(COOKIE_NAME, token, {
+		path: "/", 
+		domain: "localhost", 
+		expires,
+		httpOnly: true,
+		signed: true 
+	})
+
 	return res.status(200).json({
 		message: "User added", 
 		id: user._id.toString() 
@@ -60,6 +83,24 @@ export const userLogin = async (req, res, next) => {
 	if (!isPasswordMatch) {
 		return res.status(401).json({ message: "Incorrect password" });
 	}
+
+	res.clearCookie(COOKIE_NAME, {
+		path: "/", 
+		domain: "localhost", 
+		httpOnly: true,
+		signed: true 
+	})
+
+	const token = createToken(user._id.toString(), user.email, "7d")
+	const expires = new Date();
+	expires.setDate(expires.getDate() + 7);
+	res.cookie(COOKIE_NAME, token, {
+		path: "/", 
+		domain: "localhost", 
+		expires,
+		httpOnly: true,
+		signed: true 
+	})
 	return res.status(200).json({ message: "User logged in" , id: user._id.toString() });
 
 }	

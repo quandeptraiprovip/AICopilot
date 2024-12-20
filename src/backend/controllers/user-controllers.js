@@ -1,5 +1,5 @@
 import User from "../models/user.js"
-import {hash} from "bcrypt"
+import {hash,compare} from "bcrypt"
 export const getAllUsers = async (req, res, next) => {
 	//get all users
 	try {
@@ -18,6 +18,10 @@ export const userSignup = async (req, res, next) => {
 	//sign up a user
 	try {
 	const {email, username, password} = req.body
+	const existingUser = await User.findOne({ email })
+	if (existingUser) {
+		return res.status(401).json({ message: "User already exists" });
+	}
 	if (!email || !username || !password) {
 		return res.status(400).json({ message: "Missing required fields: email, username, password" });
 	}
@@ -33,6 +37,31 @@ export const userSignup = async (req, res, next) => {
 		message: "User added", 
 		id: user._id.toString() 
 	})
+}	
+	catch(err) {
+		console.log(err)
+		return res.status(500).json({message: "Server error", error: err})
+	}
+
+}
+
+export const userLogin = async (req, res, next) => {
+	//sign in for user
+	try {
+	const {email, password} = req.body
+	const user = await User.findOne({
+		email
+	})
+	
+	if (!user) {
+		return res.status(401).json({ message: "User not registered" });
+	}
+	const isPasswordMatch = await compare(password, user.password)
+	if (!isPasswordMatch) {
+		return res.status(401).json({ message: "Incorrect password" });
+	}
+	return res.status(200).json({ message: "User logged in" , id: user._id.toString() });
+
 }	
 	catch(err) {
 		console.log(err)

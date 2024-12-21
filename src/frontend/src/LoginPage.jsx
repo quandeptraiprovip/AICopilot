@@ -1,62 +1,69 @@
+import { useSignIn } from 'react-auth-kit';
 import { useState } from 'react';
-import './login.css'; // Import the CSS file
-import logo from './assets/logo.png'; // Your logo image path 
-
-import googleLogo from './assets/Google_logo.svg.png'; // Google logo image path
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './login.css';
+import axios from 'axios';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const signIn = useSignIn(); // Hook để đăng nhập
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (email === 'user@example.com' && password === 'password') {
-      setMessage('Login successful!');
-    } else {
+
+    try {
+      // Gửi thông tin đăng nhập đến API
+      const response = await axios.post('http://localhost:5000/login', {
+        email,
+        password,
+      });
+
+      const { token, expiresIn, user } = response.data;
+
+      // Đăng nhập người dùng bằng React-Auth-Kit
+      const success = signIn({
+        token,
+        expiresIn: expiresIn / 60, // Phút
+        tokenType: 'Bearer',
+        authState: { user }, // Lưu thêm thông tin người dùng
+      });
+
+      if (success) {
+        setMessage('Login successful!');
+        navigate('/protected'); // Điều hướng đến trang bảo mật
+      } else {
+        setMessage('Failed to log in.');
+      }
+    } catch (error) {
       setMessage('Invalid email or password.');
     }
-  };
-
-  const handleGoogleLogin = () => {
-    setMessage('Logging in with Google...');
-    // Add your Google login integration here
   };
 
   return (
     <div className="login-page">
       <div className="login-container">
-        <img src={logo} alt="Logo" className="chatgpt-logo" />
-        <h1 className="name">Only Chat</h1>
-        <h1 className="title">Welcome Back</h1>
-        <form onSubmit={handleLogin} className="login-form">
+        <h1>Login</h1>
+        <form onSubmit={handleLogin}>
           <input
             type="email"
-            placeholder="Email*"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="input-field"
             required
           />
           <input
             type="password"
-            placeholder="Password*"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="input-field"
             required
           />
-          <button type="submit" className="login-button">Log In</button>
+          <button type="submit">Log In</button>
         </form>
-        <button className="google-login-button" onClick={handleGoogleLogin}>
-          <img src={googleLogo} alt="Google Icon" className="google-logo" />
-          Login with Google
-        </button>
-        <p className="forgot-password">Forgot your password?</p>
-        <p className="sign-up">Don't have an account? <Link to="/signup" className="sign-up-link">Sign up here</Link>
-        </p>
-        {message && <p className="message">{message}</p>}
+        {message && <p>{message}</p>}
       </div>
     </div>
   );

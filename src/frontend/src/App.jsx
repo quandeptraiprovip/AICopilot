@@ -1,18 +1,23 @@
 import { Routes, Route } from 'react-router-dom';
-import LoginPage from './LoginPage';  // Import the LoginPage component
-import SignupPage from './SignupPage';  // Import the SignupPage component
+import LoginPage from './LoginPage';
+import SignupPage from './SignupPage';
+import ProtectedPage from './ProtectedPage';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   return (
     <Routes>
-      {/* Route for the default login page */}
-      <Route path="/" element={<LoginPage />} /> {/* Route for the base path */}
-      
-      {/* Route for the login page */}
-      <Route path="/login" element={<LoginPage />} /> 
-
-      {/* Route for the signup page */}
-      <Route path="/signup" element={<SignupPage />} /> 
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route
+        path="/protected"
+        element={
+          <ProtectedRoute>
+            <ProtectedPage />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }

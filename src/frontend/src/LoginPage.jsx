@@ -2,17 +2,22 @@ import React, { useState } from 'react';
 import './login.css'; // Import the CSS file
 import logo from './assets/logo.png'; // Your logo image path
 import googleLogo from './assets/Google_logo.svg.png'; // Google logo image path
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  
+  // Create navigate function
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (email === 'user@example.com' && password === 'password') {
+    if (email === 'user@gmail.com' && password === 'password') {
       setMessage('Login successful!');
+      // Navigate to HomePage after successful login
+      navigate('/homepage');  // Điều hướng đến trang HomePage
     } else {
       setMessage('Invalid email or password.');
     }
@@ -54,7 +59,6 @@ const LoginPage = () => {
         </button>
         <p className="forgot-password">Forgot your password?</p>
         <p className="sign-up">
-          {/* Don't have an account? <a href="/signup" className="sign-up-link">Sign Up</a> */}
           Don't have an account? <Link to="/signup" className="sign-up-link">Sign up here</Link>
         </p>
         {message && <p className="message">{message}</p>}

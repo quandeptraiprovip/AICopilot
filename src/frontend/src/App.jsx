@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import LoginPage from './LoginPage';  // Import the LoginPage component
 import SignupPage from './SignupPage';  // Import the SignupPage component
 import ChatPage from './ChatPage';
+import HomePage from './HomePage';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       {/* Route for the signup page */}
       <Route path="/signup" element={<SignupPage />} /> 
 
-      {/* <Route path="/chatpage" element={<ChatPage />} />  */}
+      <Route path="/chatpage" element={<ChatPage />} /> 
+      <Route path="/homepage" element={<HomePage />} /> 
     </Routes>
   );
 }

@@ -4,6 +4,8 @@ const getGoals = (req, res) => {
 }
 
 const postGoals= (req, res) => {
+    console.log(req.body);
+    
     res.status(200).json({message: "routes/index.js post"})
 }
 

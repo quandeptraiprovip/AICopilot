@@ -4,8 +4,10 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-// unfixed error here
 app.use(express.json())
+app.use(express.urlencoded({extended: false}));
+
+// unfixed error here
 // app.use('/a', import from ('./routes/index.js'));
 // app.use('/a', require('./routes/index'));
 // import appRouter from '../routes/index';

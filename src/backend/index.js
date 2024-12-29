@@ -7,11 +7,11 @@ app.get("/a",(req,res) => {
   res.send("anh quan")
 })
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 5000
 connectToDatabase().
   then(() => { 
     app.listen(PORT, () => {
-      console.log("Server on 3000 and connected to DB")
+      console.log("Server on 5000 and connected to DB")
     })
     
 })

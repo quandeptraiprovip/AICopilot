@@ -3,7 +3,12 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';  // Import BrowserRouter for routing
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
-import App from './LoginPage';  // Your main App component
+import App from './App.jsx';  // Your main App component
+import {Toaster} from 'react-hot-toast';
+import axios from 'axios';
+import { AuthProvider } from './context/Authen.tsx';
+axios.defaults.baseURL = 'http://localhost:5000/api/v1/';
+axios.defaults.withCredentials = true;
 
 // const router = createBrowserRouter(
 //   [
@@ -26,8 +31,11 @@ import App from './LoginPage';  // Your main App component
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <AuthProvider>
     <Router>
+      <Toaster position = "top-right"/>
       <App />
     </Router>
+    </AuthProvider>
   </StrictMode>,
 );

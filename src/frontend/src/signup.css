@@ -1,0 +1,103 @@
+/* Full-screen container */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background-color: rgb(226, 183, 183);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Signup page container */
+.signup-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* Signup container box */
+.signup-container {
+  width: 400px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Logo styling */
+.chatgpt-logo {
+  width: 40px;
+  height: auto;
+}
+
+/* Title */
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: Roboto, sans-serif;
+}
+
+/* Input fields */
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+/* Signup button */
+.signup-button {
+  width: 100%;
+  padding: 12px;
+  background-color: rgb(226, 183, 183);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: rgb(220, 104, 104);
+}
+
+/* Message styling */
+.message {
+  margin-top: 15px;
+  font-size: 14px;
+  color: green;
+}
+
+/* Login link */
+.login-link {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.login-link-text {
+  color: rgb(226, 183, 183);
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.login-link-text:hover {
+  color: rgb(220, 104, 104);
+  text-decoration: underline;
+}

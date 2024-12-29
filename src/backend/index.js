@@ -16,6 +16,9 @@ app.use(express.urlencoded({extended: false}));
 import app from "./app.js"
 import {connectToDatabase} from './db/connection.js'
 
+import app from "./app.js"
+import {connectToDatabase} from './db/connection.js'
+
 
 app.get("/a",(req,res) => {
   console.log(req.body);

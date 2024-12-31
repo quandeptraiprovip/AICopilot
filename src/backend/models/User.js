@@ -13,10 +13,6 @@ const chatSchema = new mongoose.Schema({
 	content: {
 		type: String,
 		required: true
-	},
-	createDate: {
-		type: Date,
-		default: Date.now()
 	}
 })
 const userSchema = new mongoose.Schema({

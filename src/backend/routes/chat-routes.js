@@ -4,6 +4,6 @@ import { chatCompletionValidator, validate } from '../utils/validators.js';
 import { generateChat } from '../controllers/chat-controllers.js';
 
 const chatRoutes = Router();
-chatRoutes.post("/chat",validate(chatCompletionValidator),verifyToken, generateChat)
+chatRoutes.post("/new",validate(chatCompletionValidator),verifyToken, generateChat)
 
 export default chatRoutes;

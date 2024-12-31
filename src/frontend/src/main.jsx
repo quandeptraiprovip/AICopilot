@@ -28,6 +28,38 @@ axios.defaults.withCredentials = true;
 //   }
 // );
 
+// const router = createBrowserRouter([
+//   {
+//     element: <RootLayout />,
+//     children: [
+//       {
+//         path: "/",
+//         element: <Homepage />,
+//       },
+//       {
+//         path: "/sign-in/*",
+//         element: <SignInPage />,
+//       },
+//       {
+//         path: "/sign-up/*",
+//         element: <SignUpPage />,
+//       },
+//       {
+//         element: <DashboardLayout />,
+//         children: [
+//           {
+//             path: "/dashboard",
+//             element: <DashboardPage />,
+//           },
+//           {
+//             path: "/dashboard/chats/:id",
+//             element: <ChatPage />,
+//           },
+//         ],
+//       },
+//     ],
+//   },
+// ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

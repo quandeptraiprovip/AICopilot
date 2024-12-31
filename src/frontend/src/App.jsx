@@ -4,6 +4,8 @@ import SignupPage from './SignupPage';  // Import the SignupPage component
 import ChatPage from './ChatPage';
 import HomePage from './HomePage';
 import { useAuth } from './context/Authen.tsx'; // Import the useAuth hook
+import Chat from './Chat.jsx';
+import DashboardPage from './pages/dashboard.jsx';
 function App() {
   console.log(useAuth()?.isLoggedIn);
   return (
@@ -20,6 +22,8 @@ function App() {
 
         {/* <Route path="/chatpage" element={<ChatPage />} />  */}
         <Route path="/chatpage" element={<ChatPage />} /> 
+        <Route path ="dashboard" element={<DashboardPage />} />
+        {/* <Route path="/chat" element={<Chat />} /> */}
       <Route path="/homepage" element={<HomePage />} /> 
       </Routes>
     </main>

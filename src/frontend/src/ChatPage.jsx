@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './chatpage.css';
 import { Link } from 'react-router-dom';
-
+ import Markdown from 'react-markdown';
+import model from '../../backend/config/gemini.js'; 
 const ChatPage = () => {
   const [chats, setChats] = useState([]);
   const [input, setInput] = useState('');
@@ -11,6 +12,8 @@ const ChatPage = () => {
   const [newChatName, setNewChatName] = useState('');  // Lưu tên mới khi người dùng đổi
   const chatListRef = useRef(null);
   const chatLayoutRef = useRef(null);
+  const [question, setquestion] = useState("")
+  const [answer, setanswer] = useState("")
 
   // Hàm xử lý khi bắt đầu kéo chuột
   const handleMouseDown = (e) => {
@@ -81,6 +84,23 @@ const ChatPage = () => {
     setNewChatName('');
   };
 
+  const addmess = async (text) => {
+    setquestion(text)
+    const result = await model.generateContent(text);
+    const response = await result.response.text();
+    setanswer(response)
+    console.log(response)
+  }
+
+  const handleSubmit = async (e) => { 
+    e.preventDefault();
+
+    const text = e.target.text.value;
+    if (!text) return;
+
+    addmess(text);
+  }
+
   useEffect(() => {
     const storedChats = JSON.parse(localStorage.getItem('chatHistory')) || [];
     setChats(storedChats);
@@ -125,6 +145,12 @@ const ChatPage = () => {
               {message.text}
             </div>
           ))}
+          {question && <div className="message user">{question}</div>}
+          {answer && (
+            <div className="message">
+              <Markdown>{answer}
+                </Markdown>
+            </div>)}
         </div>
       </div>
 
@@ -137,6 +163,16 @@ const ChatPage = () => {
           placeholder="Type your message..."
         />
         <button className="send-button" onClick={sendMessage}>Send</button>
+
+        <form className="newForm" onSubmit={handleSubmit} >
+              
+              <input id="file" type="file" multiple={false} hidden />
+              <input type="text" name="text" placeholder="Ask anything..." />
+              <button>
+                <img src="/arrow.png" alt="" />
+              </button>
+            </form>
+
       </footer>
     </div>
   );

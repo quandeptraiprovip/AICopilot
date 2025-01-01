@@ -1,5 +1,17 @@
 import { configGPT } from '../config/gpt-config.js';
 import { OpenAIApi} from "openai";
+
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// const genAI = new GoogleGenerativeAI(process.env.GEMINI);
+// const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+// const prompt = "Explain how AI works";
+
+// const result = await model.generateContent(prompt);
+// console.log(result.response.text());
+
+
 export const generateChat = async (req, res, next) => {
 	const { message } = req.body;
 
@@ -21,7 +33,7 @@ export const generateChat = async (req, res, next) => {
 		//get the response from the AI model
 		const response = await openai.createChatCompletion({model: "gpt-3.5-turbo", messages: chats});
 
-		user.chats.push(chatResponse.data.choices[0].message);
+		user.chats.push(response.data.choices[0].message);
 		await user.save();
 		return res.status(200).json({ chats: user.chats});								
 	} catch (error) {
@@ -30,4 +42,3 @@ export const generateChat = async (req, res, next) => {
 	}
 
 }
-

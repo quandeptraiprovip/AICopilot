@@ -42,20 +42,50 @@ const ChatPage = () => {
   };
 
   // Hàm gửi tin nhắn
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (input.trim() === '') return;
+  
     const userMessage = { text: input, sender: 'user' };
-    const assistantMessage = { text: 'Assistant response...', sender: 'assistant' };
-    const updatedChat = [...currentChat, userMessage, assistantMessage];
-    setCurrentChat(updatedChat);
-    setChats((prevChats) => {
-      const updatedChats = [...prevChats, { name: 'Chat ' + (prevChats.length + 1), messages: updatedChat }];
-      localStorage.setItem('chatHistory', JSON.stringify(updatedChats));
-      return updatedChats;
-    });
-    setInput('');
+    const loadingMessage = { text: '...', sender: 'assistant' }; // Tin nhắn loading tạm thời
+    const updatedChat = [...currentChat, userMessage, loadingMessage]; // Add user's message to the chat first
+    setCurrentChat(updatedChat); // Update UI with user's message
+  
+    try {
+      const assistantMessage = await addmess(userMessage.text); // Wait for assistant's response
+      const finalChat = updatedChat.map((message) =>
+        message === loadingMessage ? assistantMessage : message
+      );
+      setCurrentChat(finalChat);
+  
+      // Save updated chat history
+      setChats((prevChats) => {
+        const updatedChats = [...prevChats, { name: 'Chat ' + (prevChats.length + 1), messages: finalChat }];
+        localStorage.setItem('chatHistory', JSON.stringify(updatedChats));
+        return updatedChats;
+      });
+    } catch (error) {
+      console.error('Error fetching assistant message:', error);
+    }
+  
+    setInput(''); // Clear input field
   };
-
+  const addmess = async (text) => {
+    //setquestion(text)
+    try {
+      const result = await model.generateContent(text);
+      const response = await result.response.text();
+      return { text: response, sender: 'assistant' };
+    } catch (error) {
+      console.error('Error generating content:', error);
+      return { text: 'An error occurred. Please try again.', sender: 'assistant' };
+    }
+  }
+  const handleSubmit = async (e) => { 
+    e.preventDefault();
+    const text = e.target.text.value;
+    if (!text) return;
+    addmess(text);
+  }
   // Hàm xoá một đoạn chat
   const deleteChat = (index) => {
     const updatedChats = chats.filter((_, i) => i !== index);
@@ -84,22 +114,7 @@ const ChatPage = () => {
     setNewChatName('');
   };
 
-  const addmess = async (text) => {
-    setquestion(text)
-    const result = await model.generateContent(text);
-    const response = await result.response.text();
-    setanswer(response)
-    console.log(response)
-  }
-
-  const handleSubmit = async (e) => { 
-    e.preventDefault();
-
-    const text = e.target.text.value;
-    if (!text) return;
-
-    addmess(text);
-  }
+  
 
   useEffect(() => {
     const storedChats = JSON.parse(localStorage.getItem('chatHistory')) || [];
@@ -164,14 +179,14 @@ const ChatPage = () => {
         />
         <button className="send-button" onClick={sendMessage}>Send</button>
 
-        <form className="newForm" onSubmit={handleSubmit} >
+        {/* <form className="newForm" onSubmit={handleSubmit} >
               
               <input id="file" type="file" multiple={false} hidden />
               <input type="text" name="text" placeholder="Ask anything..." />
               <button>
                 <img src="/arrow.png" alt="" />
               </button>
-            </form>
+            </form> */}
 
       </footer>
     </div>
